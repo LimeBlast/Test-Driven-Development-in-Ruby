@@ -20,4 +20,8 @@ class Team
     @players.include? 'George Clooney'
   end
 
+  def enter_competition competition
+    raise Competition::Closed if competition.questions.empty?
+  end
+
 end
