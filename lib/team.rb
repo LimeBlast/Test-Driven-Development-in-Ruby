@@ -16,4 +16,8 @@ class Team
     list_of_words - @name.downcase.split(' ') != list_of_words
   end
 
+  def favored?
+    @players.include? 'George Clooney'
+  end
+
 end

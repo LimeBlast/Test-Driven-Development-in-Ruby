@@ -10,7 +10,9 @@ describe Team do
     Team.new('Random Name').players.should be_kind_of Array
   end
 
-  it 'is favoured if it has a celebrity in it'
+  it 'is favoured if it has a celebrity in it' do
+    Team.new('Random Name', ['George Clooney', 'Daniel Hollands']).should be_favored
+  end
 
   it 'complains if there is a bad word in the name' do
     expect { Team.new('Crappy Name') }.to raise_error
