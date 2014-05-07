@@ -11,7 +11,10 @@ describe Team do
   end
 
   it 'is favoured if it has a celebrity in it'
-  it 'complains if there is a bad word in the name'
+
+  it 'complains if there is a bad word in the name' do
+    expect { Team.new('Crappy Name') }.to raise_error
+  end
 
   context 'given a bad list of players' do
     let(:bad_players) { {} }
