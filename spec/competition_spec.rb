@@ -7,7 +7,7 @@ describe Competition do
   let(:team) { Team.new('Random Name') }
 
   context 'having no questions' do
-    before { competition.questions = [] }
+    before { competition.stub(:questions => []) }
 
     it "it doesn't accept any teams" do
       competition.should_not allow_teams_to_enter
@@ -15,7 +15,7 @@ describe Competition do
   end
 
   context 'having questions' do
-    before { competition.questions = [{:title => 'Question'}] }
+    before { competition.stub(:questions => [ stub ]) }
     subject { competition }
 
     it { should allow_teams_to_enter }
