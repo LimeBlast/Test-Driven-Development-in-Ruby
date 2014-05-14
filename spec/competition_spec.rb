@@ -21,4 +21,11 @@ describe Competition do
     it { should allow_teams_to_enter }
   end
 
+  context 'when started' do
+    it 'is closed' do
+      competition.should_receive(:close)
+      competition.start
+    end
+  end
+
 end

@@ -3,4 +3,8 @@ class Competition
 
   class Closed < StandardError
   end
+
+  def start
+    close
+  end
 end
