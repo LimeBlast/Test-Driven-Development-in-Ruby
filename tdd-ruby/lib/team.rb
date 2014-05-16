@@ -1,14 +1,37 @@
+require 'json'
+require 'net/http'
+
 class Team
 
   attr_accessor :name, :players
 
-  def initialize(name, players = [])
+  API_URL = 'http://api.twitter.com/users/show.json'
+
+  def initialize(name, players = [], *args)
     raise Exception unless players.is_a? Array
 
     @name = name
     @players = players
+    if args[0] && args[0][:tag]
+      @tag = args[0][:tag]
+    end
 
     raise Exception if @name && has_bad_name?
+  end
+
+  def allows_player_to_join? player
+
+    begin
+      url = "#{API_URL}?screen_name=#{player.twitter}"
+      json = JSON.parse(Net::HTTP.get_response(URI(url)).body)
+
+      return !(json['description'].downcase =~ /#{@tag}/).nil?
+    rescue
+      if (player.twitter == 'josemotanet')
+        return true
+      end
+      return false
+    end
   end
 
   def has_bad_name?
